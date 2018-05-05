@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PMS</title>
+    <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/fontawesome-all.min.css' rel='stylesheet'>
+    <link href='/css/app.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/index.html">PMS</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" v-on:click.prevent="resetinput">
+                            <i class="fas fa-undo"></i> Reset</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click.prevent="publish">
+                            <i class="fas fa-share-alt"></i> Publish</a>
+                    </li>
+                    <li>
+                        <a href="/docs/#/de-de/readme"><i class="fas fa-question"></i>  Help</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-fixed-400">
+                <div class="clearfix" id="playgroundarea">
+                    <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
+                    <button class="btn btn-primary pull-right" v-on:click="play">
+                        <i class="fas fa-play"></i> Run</button>
+                </div>
+                <br />
+                <div id="resourcearea">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="video" class="col-sm-3 control-label">Video</label>
+                            <div class="col-sm-9">
+                                <input v-model="video" type="text" class="form-control" id="video" placeholder="youtube, vimeo, img, iframe or google maps">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="autoplay" class="col-sm-3 control-label">autoplay</label>
+                            <div class="col-sm-9">
+                                <input type="checkbox" id="autoplay" v-model="autoplay">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12 col-offset-400">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="task" class="col-sm-2 control-label">Task</label>
+                        <div class="col-sm-10" id="task">
+                            <input v-model="task" type="text" class="form-control" id="task" placeholder="taskname">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task" class="col-sm-2 control-label">Language</label>
+                        <div class="col-sm-10">
+                            <select id="lang" v-model="lang" class="form-control">
+                                <option v-for="lang in uniqueLangs">
+                                    {{ lang }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task" class="col-sm-2 control-label">Template</label>
+                        <div class="col-sm-10">
+                            <div id="name">
+                                <template v-if="count">
+                                    <select v-model="enviroment" class="form-control">
+                                        <option v-for="e in enviroments" v-if="e.lang == lang">
+                                            {{ e.name }}
+                                        </option>
+                                    </select>
+                                </template>
+                                <template v-else>
+                                    <select disabled v-model="enviroment" class="form-control">
+                                        <option value="" selected disabled>Please select language first.</option>
+                                    </select>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <br />
+
+
+                <div id="editorarea" v-show="lang">
+
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a v-on:click="edithtml" data-toggle="tab" href="#">HTML</a>
+                        </li>
+                        <li>
+                            <a v-on:click="editcss" data-toggle="tab" href="#">CSS</a>
+                        </li>
+                        <li>
+                            <a v-on:click="editcode" data-toggle="tab" href="#">{{ lang }}</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div class="panel panel-default">
+                            <div class="panel-body editor-panel">
+                                <div id="editor"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 hidden-xs">
+                    <p class="text-muted">(c) wi-wissen.de</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="text-muted">
+                        <a href="https://wi-wissen.de/contact.php">Contact</a> -
+                        <a href="https://wi-wissen.de/contact.php">Report</a> -
+                        <a href="/termsofuse.html">Terms of Use</a> -
+                        <a href="https://wi-wissen.de/impress.html">Disclaimer &amp; Impress</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootbox.min.js"></script>
+
+    <script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/edit.js"></script>
+</body>
+
+</html>

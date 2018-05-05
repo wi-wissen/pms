@@ -1,0 +1,16 @@
+body {
+	font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+    line-height: 16px;
+    
+    color: white;
+    background-color:#525252;
+}
+
+pre {
+    padding: 0;
+    margin: 0;
+}

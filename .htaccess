@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+		
+		#task
+		RewriteRule ^t\/([\w]*)$ show.html?t=$1 [QSA,L]
+		
+		#add
+		RewriteRule ^create$ edit.html [QSA,L]
+		
+		#fork
+		RewriteRule ^create\/([\w]*)$ edit.html?t=$1 [QSA,L]
+		
+		#api1
+		RewriteRule ^api1$ db/api1.php [QSA,L]
+		RewriteRule ^api1\/([\w]*)\.json$ db/api1.php?key=$1 [QSA,L]
+		
+</IfModule>

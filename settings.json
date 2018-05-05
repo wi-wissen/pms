@@ -1,0 +1,189 @@
+{
+    "backend": "http://localhost/pms/db/api1.php",
+    "impress": "/impress.html",
+    "enviroments": [
+        {
+            "lang": "JavaScript",
+            "name": "Empty",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [],
+            "codefiles": [],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": ""
+        },
+        {
+            "lang": "JavaScript",
+            "name": "Console",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [
+                "/enviroments/js-console/log.css"
+            ],
+            "codefiles": [
+                "/enviroments/js-console/log.js"
+            ],
+            "codefilesafter": [],
+            "html": "<pre id='log'></pre>",
+            "css": "",
+            "code": "console.log('hi');"
+        },
+        {
+            "lang": "JavaScript",
+            "name": "Sokoban",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [
+                "/enviroments/js-sokoban/css/sokoban.css"
+            ],
+            "codefiles": [
+                "/enviroments/js-sokoban/js/sokoban.js"
+            ],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": "window.onload = function () {\n    w = 32; //cellsize\n    margin = 2; //margin inside cell\n    wait = 800; //wait between each move and turn of kara\n    style = 'icon8_ios'; // classic, flaticon, icon8_color, icon8_ios, icon8_office\n\n    /*\n        #: Baum\n        @: Kara\n        .: Blatt\n        $: Pilz\n        *: Pilz auf einem Blatt\n        +: Kara auf einem Blatt\n    \n    */\n    // be aware that space in front of line are interpretated as empty fields\n    karasworld = `world:\n#####\n# .. #\n#$@  #\n# *  #\n######`\n\n    setup();\n}\n\nfunction run() {\n    kara.move();\n    kara.move();\n    kara.turnLeft();\n    kara.move();\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "name": "p5 (Processing)",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [],
+            "codefiles": [
+                "/enviroments/js-p5/p5.min.js",
+                "/enviroments/js-p5/p5.dom.min.js",
+                "/enviroments/js-p5/p5.sound.min.js"
+            ],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": ""
+        },
+        {
+            "lang": "JavaScript",
+            "name": "Turtle",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [],
+            "codefiles": [
+                "/enviroments/js-p5/p5.min.js",
+                "/enviroments/js-turtle/turtle.js"
+            ],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": ""
+        },
+        {
+            "lang": "JavaScript",
+            "name": "Bootstrap3, jQuery and alert()",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js"
+            ],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": ""
+        },
+        {
+            "lang": "CoffeeScript",
+            "name": "Empty",
+            "type": "text/coffeescript",
+            "acemode": "coffee",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js"
+            ],
+            "codefilesafter": [
+                "/enviroments/coffeescript/coffeescript.js"
+            ],
+            "html": "",
+            "css": "",
+            "code": "alert 'hi'"
+        },
+        {
+            "lang": "TypeScript",
+            "name": "Empty",
+            "type": "text/typescript",
+            "acemode": "typescript",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js"
+            ],
+            "codefilesafter": [
+                "/enviroments/typescript/typescriptServices.js",
+                "/enviroments/typescript/transpiler.js"
+            ],
+            "html": "",
+            "css": "",
+            "code": "alert('hello');"
+        },
+        {
+            "lang": "Python",
+            "name": "Console",
+            "type": "text/python",
+            "acemode": "python",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js"
+            ],
+            "codefilesafter": [
+                "/enviroments/python/skulpt.min.js",
+                "/enviroments/python/skulpt-stdlib.js",
+                "/enviroments/python/run-python.js"
+            ],
+            "html": "<pre id='output' ></pre>",
+            "css": "",
+            "code": "print 'Hello World'"
+        },
+        {
+            "lang": "Python",
+            "name": "Turtle",
+            "type": "text/python",
+            "acemode": "python",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js"
+            ],
+            "codefilesafter": [
+                "/enviroments/python/skulpt.min.js",
+                "/enviroments/python/skulpt-stdlib.js",
+                "/enviroments/python/run-python-canvas.js"
+            ],
+            "html": "<div id='mycanvas'></div> ",
+            "css": "",
+            "code": "import turtle\n\nt = turtle.Turtle()\n\nfor c in ['red', 'green', 'yellow', 'blue']:\n    t.color(c)\n    t.forward(75)\n    t.left(90)"
+        }
+    ]
+}

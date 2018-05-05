@@ -1,0 +1,113 @@
+/* success info warning danger */
+.markdown-section p.alert {
+    background-color: #f8f8f8;
+    border-bottom-right-radius: 2px;
+    border-left: 4px solid #f66;
+    border-top-right-radius: 2px;
+    margin: 2em 0;
+    padding: 12px 24px 12px 30px;
+    position: relative;
+  }
+  .markdown-section p.alert:before {
+    background-color: #f66;
+    border-radius: 100%;
+    color: #fff;
+    content: '!';
+    font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    left: -12px;
+    line-height: 20px;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    top: 14px;
+  }
+  .markdown-section p.alert code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert em {
+    color: #34495e;
+  }
+
+/* success*/
+.markdown-section p.alert-success  {
+    border-left: 4px solid #42b983;
+  }
+  .markdown-section p.alert-success:before {
+    background-color: #42b983;
+    color: #fff;
+    content: '✓';
+  }
+  .markdown-section p.alert-success code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert-success em {
+    color: #34495e;
+  }
+
+/* info*/
+.markdown-section p.alert-info  {
+    border-left: 4px solid #4582AE;
+  }
+  .markdown-section p.alert-info:before {
+    background-color: #4582AE;
+    color: #fff;
+    content: 'i';
+  }
+  .markdown-section p.alert-info code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert-info em {
+    color: #34495e;
+  }
+
+/* warning*/
+.markdown-section p.alert-warning  {
+    border-left: 4px solid #FFAB66;
+  }
+  .markdown-section p.alert-warning:before {
+    background-color: #FFAB66;
+    color: #fff;
+    content: '!';
+  }
+  .markdown-section p.alert-warning code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert-warning em {
+    color: #34495e;
+  }
+
+/* danger*/
+.markdown-section p.alert-danger  {
+    border-left: 4px solid #f66;
+  }
+  .markdown-section p.alert-danger:before {
+    background-color: #f66;
+    color: #fff;
+    content: '⨯';
+  }
+  .markdown-section p.alert-danger code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert-danger em {
+    color: #34495e;
+  }
+
+/* task*/
+.markdown-section p.alert-task  {
+    border-left: 4px solid #364149;
+  }
+  .markdown-section p.alert-task:before {
+    background-color: #364149;
+    color: #fff;
+    content: '🖉';
+  }
+  .markdown-section p.alert-task code {
+    background-color: #efefef;
+  }
+  .markdown-section p.alert-task em {
+    color: #34495e;
+  }
+

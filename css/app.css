@@ -1,0 +1,79 @@
+/* Collums */
+  .col-fixed-400{
+    width:400px;
+    position:fixed;
+    height:100%;
+    z-index:1;
+    margin-left: 10px;
+}
+
+.col-offset-400{
+    padding-left:435px;
+    z-index:0;
+}
+
+/* Left Side */
+iframe {
+    width: 400px;
+    height: 400px;
+    border: 1px #e7e7e7 solid; 
+}
+
+/* Right Side */
+
+.editor-panel {
+    padding: 0px !important;
+    
+}
+
+#editor {
+    width: 100%;
+    position: relative;
+    min-height: 400px;
+	/* height: calc(100vh - 148px - 42px - 60px - 25px); */
+	height: calc(100vh - 270px - 50px - 40px);
+}
+
+/* Content */
+
+.container {
+    width: auto;
+    max-width: 1600px;
+    padding: 0 15px;
+  }
+
+  body > .container {
+    padding: 60px 15px 0;
+  }
+  .container .text-muted {
+    margin: 20px 0;
+  }
+
+  .panel-heading   {
+      padding: 3px 10px;
+  }
+
+  .panel-body {
+    padding: 5px  10px;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+  }
+  
+  
+  

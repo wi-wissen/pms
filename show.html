@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PMS</title>
+    <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/fontawesome-all.min.css' rel='stylesheet'>
+    <link href='/css/lity.min.css' rel='stylesheet'>
+    <link href='/css/app.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/index.html">PMS</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="" v-on:click.prevent="resetinput"><i class="fas fa-undo"></i> Reset</a>
+                    </li>
+                    <li>
+                        <a href="" v-on:click.prevent="fork"><i class="fas fa-code-branch"></i> Fork</a>
+                    </li>
+                    <li>
+                        <a href="/docs/#/de-de/readme"><i class="fas fa-question"></i>  Help</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-fixed-400">
+                <div class="clearfix" id="playgroundarea">
+                    <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
+                    <button class="btn btn-primary pull-right" v-on:click="play"><i class="fas fa-play"></i> Run</button>
+                </div>
+                <br />
+                <div id="resourcearea">
+                    <div v-if="videoexist" class="list-group">
+                        <a v-if="autoplay" v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> see intro again</a>
+                        <a v-else v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> get help</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-offset-400">
+                <div id="editorarea" v-show="lang">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Task</div>
+                        <div class="panel-body">
+                            {{task}}
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{ lang }}</div>
+                        <div class="panel-body editor-panel">
+                            <div id="editor"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 hidden-xs">
+                    <p class="text-muted">(c) wi-wissen.de</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="text-muted">
+                        <a href="https://wi-wissen.de/contact.php">Contact</a> -
+                        <a href="https://wi-wissen.de/contact.php">Report</a> -
+                        <a href="/termsofuse.html">Terms of Use</a> -
+                        <a href="https://wi-wissen.de/impress.html">Disclaimer &amp; Impress</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/lity-fork.min.js"></script>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-router.min.js"></script>
+    <script src="/js/show.js"></script>
+</body>
+
+</html>
