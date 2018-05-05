@@ -34,9 +34,7 @@ Many thanks and respect to:
 * https://github.com/basarat/typescript-script (MIT)
 * https://github.com/processing/p5.js (GNU)
 * http://cmuems.com/2015c/deliverables/turtle-graphics/ (unknown)
-* Kara flaticon nach https://www.flaticon.com/ ([licence](https://support.flaticon.com/hc/en-us/articles/207248209) - app) 
-* kara icon8_*  nach https://icons8.de/app (CC BY-ND 3.0) ([Game](https://icons8.crisp.help/en/article/where-do-i-set-the-link-irwkfh/))
-* Kara Classic nach http://www.swisseduc.ch/about/copyright/
+* https://github.com/wi-wissen/JavaScriptKara (MIT but images are other licenced)
 
 
 
