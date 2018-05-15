@@ -28,7 +28,22 @@ function setupEditor() {
     console.log(data.n);
     data.editor_code = null;
     data.editor_code = new EditSession(data.code, "ace/mode/" + data.enviroments[data.n].acemode);
-    data.editor_code.setValue(data.code);
+
+    //show only wanted parts of code
+    var re = new RegExp("[\s\S]*?(\/\/|#)[ ]?start\\n((.*?)\\n((\/\/|#)[ ]?stop)|(.*))", "i");
+    var result = re.exec(data.code);
+
+    if (result == null) {
+        data.editor_code.setValue(data.code);
+    } else if (result[3] != undefined) {
+        data.editor_code.setValue(result[3]);
+    } else if (result[6] != undefined) {
+        data.editor_code.setValue(result[6]);
+    } else {
+        console.log("can't parse code for showing!");
+    }
+
+
     console.log(data.code);
     console.log(data.enviroments[data.n].acemode);
     console.log("editor built");
@@ -136,6 +151,19 @@ new Vue({
         play: function () {
             var css = "";
             var code = "";
+            var _editor_code = "";
+
+            //show only wanted parts of code
+            var re = new RegExp("[\s\S]*?(\/\/|#)[ ]?start\\n((.*?)\\n((\/\/|#)[ ]?stop)|(.*))", "i");
+            var result = re.exec(data.code);
+            console.log('result');
+            console.log(result);
+
+            if (result == null) {
+                _editor_code = data.code;
+            } else {
+                _editor_code = data.code.replace(result[0], this.editor_code.getValue());
+            }            
 
             for (var i in this.enviroments[this.n].cssfiles) {
                 css = css + "<link href='" + this.enviroments[this.n].cssfiles[i] + "' rel='stylesheet'>";
@@ -145,7 +173,7 @@ new Vue({
             for (var i in this.enviroments[this.n].codefiles) {
                 code = code + "<script src='" + this.enviroments[this.n].codefiles[i] + "'></script>";
             }
-            code = code + "<script type='" + this.enviroments[this.n].type + "'>" + this.editor_code.getValue() + "</script>";
+            code = code + "<script type='" + this.enviroments[this.n].type + "'>" + _editor_code + "</script>";
             for (var i in this.enviroments[this.n].codefilesafter) {
                 code = code + "<script src='" + this.enviroments[this.n].codefilesafter[i] + "'></script>";
             }

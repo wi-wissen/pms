@@ -27,6 +27,31 @@ Zur Aufgabenbeschreibung kann ein kurzer Text gehören und ein Video, Bild, IFra
 
 Im Menü kann mit "Publish" die Aufgabe veröffentlicht werden. Es wird einmalig ein kurzer Link angezeigt, welcher mit den Lernenden geteilt werden kann. Das nachträgliche Ändern der Aufgaben ist zwar nicht möglich, dafür kann aber natürlich auch die eigene Aufgabe geforkt werden.
 
+
+
+Manchmal soll der Lernende nicht den gesamten Quelltext sehen. Dafür können Teile des Quelltextes im Editor ausgeblendet werden:
+
+```js
+console.log('hi');
+// start
+console.log('first?');
+// stop
+```
+
+oder
+
+```coffeescript
+alert = require 'alert-node'
+alert 'hi'
+# start
+alert 'first?'
+# stop
+```
+
+Es wird nur der Text zwischen Start und Stop angezeigt. Wobei das Schlüsselwort Stop weggelassen werden kann. Sobald der Lernende "Fork" auswählt oder das Programm ausführt, wird der gesamte Quelltext verwendet.
+
+
+
 ## Aufgaben lösen
 
 ​Du hast eine Aufgabe bekommen und fragst dich wie du diese lösen kannst? Die Musterlösung findest du hier leider nicht.  :stuck_out_tongue_winking_eye:
