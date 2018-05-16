@@ -149,6 +149,7 @@ new Vue({
     data: data,
     methods: {
         play: function () {
+
             var css = "";
             var code = "";
             var _editor_code = "";
@@ -160,7 +161,7 @@ new Vue({
             console.log(result);
 
             if (result == null) {
-                _editor_code = data.code;
+                _editor_code = this.editor_code.getValue();
             } else {
                 _editor_code = data.code.replace(result[0], this.editor_code.getValue());
             }            
@@ -179,6 +180,7 @@ new Vue({
             }
 
             this.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+                + "<!-- created:" + new Date() + " -->"
                 + css + "</head><body>"
                 + this.html + code + "</body></html>";
             console.log(this.iframehtml);
