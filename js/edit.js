@@ -238,6 +238,7 @@ new Vue({
 
 
             this.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+                + "<!-- created:" + new Date() + " -->"
                 + css + "</head><body>"
                 + data.editor_html.getValue() + code + "</body></html>";
             console.log(this.iframehtml);
