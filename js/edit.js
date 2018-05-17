@@ -9,6 +9,11 @@ var data = {
     editor_html: null,
     editor_css: null,
     editor_code: null,
+    html: "",
+    css: "",
+    code: "",
+    enviroment_preset: "",
+    lang_preset: "",
     iframehtml: ""
 }
 
@@ -18,7 +23,7 @@ function setupEditor() {
     editor.setOptions({
         fontSize: 14,
         enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true,
+        enableLiveAutocompletion: false,
         showPrintMargin: false
     })
     var EditSession = ace.require("ace/edit_session").EditSession;
@@ -35,15 +40,21 @@ function setupEditor() {
 }
 
 function fillEditor() {
-    data.editor_html.setValue(data.enviroments[data.n].html);
-    data.editor_css.setValue(data.enviroments[data.n].css);
-    data.editor_code.setValue(data.enviroments[data.n].code);
+    if (data.enviroment == data.enviroment_preset
+        && data.lang == data.lang_preset) {
+        data.editor_html.setValue(data.html);
+        data.editor_css.setValue(data.css);
+        data.editor_code.setValue(data.code);
+    } else {
+        data.editor_html.setValue(data.enviroments[data.n].html);
+        data.editor_css.setValue(data.enviroments[data.n].css);
+        data.editor_code.setValue(data.enviroments[data.n].code);
+    }
 
     var editor = ace.edit("editor");
     editor.setSession(data.editor_code);
 
     console.log("new setting filled in");
-
 }
 
 var vm = new Vue({
@@ -66,7 +77,7 @@ var vm = new Vue({
         var url = new URL(location);
         //var t = url.searchParams.get("t");
         var t = window.location.href.split("/").pop();
-        if (t != null && t != "create") {
+        if (t != null && t != "create" && t != "") {
             console.log("it's a fork!");
             axios.get('/api1/' + t + '.json')
                 .then(function (response) {
@@ -87,19 +98,20 @@ var vm = new Vue({
 
                     setupEditor();
 
-                    data.editor_html.setValue(response.data.html);
-                    data.editor_css.setValue(response.data.css);
-                    data.editor_code.setValue(response.data.code);
+                    vm.html = response.data.html;
+                    vm.css = response.data.css;
+                    vm.code = response.data.code;
+                    vm.lang_preset = vm.lang;
+                    vm.enviroment_preset = vm.enviroment;
 
                     var editor = ace.edit("editor");
-                    editor.setSession(data.editor_code);
+                    editor.setSession(vm.editor_code);
 
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         }
-
     }
 })
 
