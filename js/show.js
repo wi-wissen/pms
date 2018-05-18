@@ -30,7 +30,7 @@ function setupEditor() {
     data.editor_code = new EditSession(data.code, "ace/mode/" + data.enviroments[data.n].acemode);
 
     //show only wanted parts of code
-    var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|(.*))", "im");
+    var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|([\\s\\S]*))", "im");
     var result = re.exec(data.code);
     console.log(data.code);
     console.log(result);
@@ -40,7 +40,7 @@ function setupEditor() {
     } else if (result[3] != undefined) {
         data.editor_code.setValue(result[3]);
     } else if (result[5] != undefined) {
-        data.editor_code.setValue(result[6]);
+        data.editor_code.setValue(result[5]);
     } else {
         console.log("can't parse code for showing!");
     }
@@ -157,7 +157,7 @@ new Vue({
             var _editor_code = "";
 
             //show only wanted parts of code
-            var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|(.*))", "im");
+            var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|([\\s\\S]*))", "im");
             var result = re.exec(data.code);
             console.log('result');
             console.log(result);
