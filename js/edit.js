@@ -6,6 +6,7 @@ var data = {
     lang: "",
     autoplay: false,
     video: "",
+    description: "",
     editor_html: null,
     editor_css: null,
     editor_code: null,
@@ -14,7 +15,22 @@ var data = {
     code: "",
     enviroment_preset: "",
     lang_preset: "",
-    iframehtml: ""
+    iframehtml: "",
+    customToolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'color': [] }, { 'background': [] }], 
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link', 'image', 'code-block']
+    ],
+    editorTaskToolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link']
+    ],
+    editorTaskOptions: {
+        placeholder: 'taskname',
+        theme: 'bubble'
+    }
 }
 
 function setupEditor() {
@@ -88,6 +104,7 @@ var vm = new Vue({
                     vm.task = response.data.task;
                     vm.autoplay = response.data.autoplay;
                     vm.video = response.data.video;
+                    vm.description = response.data.description;
 
                     for (var i in data.enviroments) {
                         if (data.enviroments[i].lang == data.lang &&
@@ -131,6 +148,7 @@ new Vue({
                 task: data.task,
                 autoplay: data.autoplay,
                 video: data.video,
+                description: data.description,
                 html: data.editor_html.getValue(),
                 css: data.editor_css.getValue(),
                 code: data.editor_code.getValue()

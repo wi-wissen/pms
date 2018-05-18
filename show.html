@@ -51,18 +51,21 @@
                 </div>
                 <br />
                 <div id="resourcearea">
-                    <div v-if="videoexists" class="list-group">
+                    <div v-if="video !== '' && video !== undefined && video !== '#description'" class="list-group">
                         <a v-if="autoplay" v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> see intro again</a>
                         <a v-else v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> get help</a>
+                    </div>
+                    <div id="description" class="panel panel-default" v-if="description !== false" >
+                        <div class="panel-body" v-html=description>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-offset-400">
                 <div id="editorarea" v-show="lang">
-                    <div v-if="task !== ''" class="panel panel-default">
+                    <div v-if="task !== ''  && task !== undefined && task !== false" class="panel panel-default">
                         <div class="panel-heading">Task</div>
-                        <div class="panel-body">
-                            {{task}}
+                        <div class="panel-body" v-html=task>
                         </div>
                     </div>
 

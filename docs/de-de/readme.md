@@ -23,7 +23,10 @@ Beim Erstellen einer Aufgabe geht man wie folgt vor:
 2. Es wird eine für die Zielsprache zur Verfügung stehende Umgebung ausgewählt. 
 3. HTML, CSS und das Programm können bereits vorbereitet werden.
 
-Zur Aufgabenbeschreibung kann ein kurzer Text gehören und ein Video, Bild, IFrame oder Karte.
+Zur Aufgabenbeschreibung kann ein kurzer Text gehören und ein Video, Bild, IFrame oder Karte:
+
+* Task kann mit einem Doppelklick auf das gewünschte Wort grundlegend Formatiert werden. Es wird empfohlen hier sparsam mit der Formatierung umzugehen.
+* Die Beschreibung (Description) kann auch mit Bildern frei gestaltet werden. Bitte beachte, dass die Bilder nicht zu groß sind. Dies kann dazu führen, dass der Server den Task nicht speichert. Du kannst die Beschreibung auch zu Beginn anzeigen lassen, wenn anstelle des Links `#description` eingegeben wird.
 
 Im Menü kann mit "Publish" die Aufgabe veröffentlicht werden. Es wird einmalig ein kurzer Link angezeigt, welcher mit den Lernenden geteilt werden kann. Das nachträgliche Ändern der Aufgaben ist zwar nicht möglich, dafür kann aber natürlich auch die eigene Aufgabe geforkt werden.
 

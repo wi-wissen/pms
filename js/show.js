@@ -6,6 +6,7 @@ var data = {
     lang: "",
     autoplay: false,
     video: "",
+    description:"",
     html: "",
     css: "",
     code: "",
@@ -87,6 +88,7 @@ var vm = new Vue({
                 vm.task = response.data.task;
                 vm.autoplay = response.data.autoplay;
                 vm.video = response.data.video;
+                vm.description = response.data.description;
                 vm.html = response.data.html;
                 vm.css = response.data.css;
                 vm.code = response.data.code;
