@@ -10,7 +10,7 @@ var vm = new Vue({
         let vm = this;
         //is it a fork?
         vm.c = window.location.href.split("/").pop();
-        if (vm.c != null && vm.c != "create" && vm.c != "") {
+        if (vm.c != null && vm.c != "createcollection" && vm.c != "") {
             console.log("it's a fork!");
             axios.get('/api1/c/' + vm.c + '.json')
                 .then(function (response) {
