@@ -13,7 +13,7 @@
 <body>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav id="navbar" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -23,18 +23,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 <a class="navbar-brand" href="/index.html">PMS</a>
+
+                <ul v-if="collection.length" class="nav navbar-nav">
+                    <li v-for="(task, key) in collection" class="hidden-xs">
+                        <p class="navbar-btn">
+                            <a :href="'/c/' + c + '/t/' + task.name" v-bind:class="[t === task.name ? 'active' : '', 'btn btn-default btn-circle']"></a>&nbsp;
+                        </p>
+                    </li>
+                </ul>
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="" v-on:click.prevent="resetinput"><i class="fas fa-undo"></i> Reset</a>
+                        <a href="" v-on:click.prevent="resetinput">
+                            <i class="fas fa-undo"></i> Reset</a>
                     </li>
                     <li>
-                        <a href="" v-on:click.prevent="fork"><i class="fas fa-code-branch"></i> Fork</a>
+                        <a :href="'/create/' + t">
+                            <i class="fas fa-code-branch"></i> Fork</a>
                     </li>
                     <li>
-                        <a href="/docs/#/de-de/readme"><i class="fas fa-question"></i>  Help</a>
+                        <a href="/docs/#/de-de/readme">
+                            <i class="fas fa-question"></i> Help</a>
                     </li>
                 </ul>
             </div>
@@ -47,15 +59,18 @@
             <div class="col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
-                    <button class="btn btn-primary pull-right" v-on:click="play"><i class="fas fa-play"></i> Run</button>
+                    <button class="btn btn-primary pull-right" v-on:click="play">
+                        <i class="fas fa-play"></i> Run</button>
                 </div>
                 <br />
                 <div id="resourcearea">
-                    <div v-if="video !== '' && video !== undefined && video !== '#description'" class="list-group">
-                        <a v-if="autoplay" v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> see intro again</a>
-                        <a v-else v-bind:href="video" data-lity class="list-group-item"><i class="fas fa-play-circle"></i> get help</a>
+                    <div v-if="video !== '' && video !== '#description' && video !== false" class="list-group">
+                        <a v-if="autoplay" v-bind:href="video" data-lity class="list-group-item">
+                            <i class="fas fa-play-circle"></i> see intro again</a>
+                        <a v-else v-bind:href="video" data-lity class="list-group-item">
+                            <i class="fas fa-play-circle"></i> get help</a>
                     </div>
-                    <div id="description" class="panel panel-default" v-if="description !== false" >
+                    <div id="description" class="panel panel-default" v-if="description !== ''   && task !== false">
                         <div class="panel-body" v-html=description>
                         </div>
                     </div>
@@ -63,7 +78,7 @@
             </div>
             <div class="col-md-12 col-offset-400">
                 <div id="editorarea" v-show="lang">
-                    <div v-if="task !== ''  && task !== undefined && task !== false" class="panel panel-default">
+                    <div v-if="task !== ''  && task !== false" class="panel panel-default">
                         <div class="panel-heading">Task</div>
                         <div class="panel-body" v-html=task>
                         </div>
@@ -90,19 +105,21 @@
                 </div>
                 <div class="col-md-6 text-right">
                     <p class="text-muted">
-                        <a href="https://wi-wissen.de/contact.php">Contact</a> - 
+                        <a href="https://wi-wissen.de/contact.php">Contact</a> -
                         <a href="https://wi-wissen.de/contact.php">Report</a> -
                         <a href="/termsofuse.html">Terms of Use</a> -
-                        <a href="https://wi-wissen.de/datenschutz.html">Privacy</a> - 
-                        <a href="https://wi-wissen.de/impressum.html">Impress</a></p>
+                        <a href="https://wi-wissen.de/datenschutz.html">Privacy</a> -
+                        <a href="https://wi-wissen.de/impressum.html">Impress</a>
+                    </p>
                 </div>
-            </div>  
+            </div>
         </div>
     </footer>
 
-    
+
 
     <script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 
     <!--<script src="/js/zepto.min.js"></script>-->
     <script src="/js/jquery-3.3.1.min.js"></script>

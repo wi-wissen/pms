@@ -1,6 +1,4 @@
 {
-    "backend": "http://localhost/pms/db/api1.php",
-    "impress": "/impress.html",
     "enviroments": [
         {
             "lang": "JavaScript",

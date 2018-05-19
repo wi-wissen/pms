@@ -30,7 +30,9 @@ Read more (only in German): https://blog.wi-wissen.de/
 1. Copy project to your php server
 2. Point a (sub-)domain to this folder
 3. rename db/db.db.blanc to db/db.db
-4. change index.html to your needs
+4. rename db/salt.php.blanc to db/salt.php
+5. set random salts inside db/salt.php
+6. change index.html to your needs
 
 
 

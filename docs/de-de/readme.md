@@ -61,6 +61,17 @@ Es wird nur der Text zwischen Start und Stop angezeigt. Wobei das Schlüsselwort
 
 Überlege dir ein Algorithmus zur Lösung der Aufgabe. Hast du diesen, implementiert zu ihn in der vorgegebenen Programmiersprache. Anschließend kannst du dein Programm mit einem Klick auf den Knopf "Play" ausprobieren. Bist du mit deinem Ergebnis zufrieden, kannst du zur nächsten Aufgabe übergehen.
 
+
+
+## Aufgabensammlungen erstellen
+
+Sollen die Lernenden mehre Aufgaben erstellen, so kannst du eine Aufgabensammlung erstellt werden. Die einzelnen Aufgaben werden in der Navigationsleiste angezeigt.
+
+Wie Aufgaben können auch Aufgabensammlungen geforkt werden. Dafür gibt es keinen Einstieg über die Oberfläche. Rufe einfach [https://ada7.de/createcollection/TOKEN](#) auf. Das kann etwa https://ada7.de/createcollection/xjmb sein.
+
+
+
+
 ## Mitmachen
 
 ada7.de wurde als Open Source Plattform programmiert, damit Lehrkräfte und Lernende Aufgaben unkompliziert austauschen können. Wenn du also eine gute Aufgabe oder Aufgabensammlung erstellt hast, wäre es wirklich sehr schön, denn du diese mit uns anderen Lehrenden und Lernenden teilen würdest!

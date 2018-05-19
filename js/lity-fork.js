@@ -169,7 +169,21 @@
             iframeUrl = transferHash(hashUrl, iframeUrl);
         }
 
-        return '<div class="lity-iframe-container"><iframe frameborder="0" allowfullscreen src="' + iframeUrl + '" sandbox="allow-scripts allow-pointer-lock allow-same-origin"/></div>';
+        return '<div class="lity-iframe-container"><iframe frameborder="0" allowfullscreen src="' + iframeUrl + '"/></div>';
+    }
+
+    function sandboxIframe(iframeUrl, instance, queryParams, hashUrl) {
+        instance && instance.element().addClass('lity-iframe');
+
+        if (queryParams) {
+            iframeUrl = appendQueryParams(iframeUrl, queryParams);
+        }
+
+        if (hashUrl) {
+            iframeUrl = transferHash(hashUrl, iframeUrl);
+        }
+
+        return '<div class="lity-iframe-container"><iframe frameborder="0" allowfullscreen src="' + iframeUrl + '" sandbox="allow-scripts allow-pointer-lock"/></div>';
     }
 
     function error(msg) {
@@ -305,7 +319,7 @@
     }
 
     function iframeHandler(target, instance) {
-        return iframe(target, instance);
+        return sandboxIframe(target, instance);
     }
 
     function winHeight() {

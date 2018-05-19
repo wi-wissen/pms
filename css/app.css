@@ -103,6 +103,30 @@ div#editor_task.ql-container .ql-editor:focus, #resourcearea > div.quillWrapper:
   z-index: 1000;
 }
 
+/* collection editor */
+.badge.delete {
+  cursor: pointer;
+}
+
+.drag div li {
+  cursor: move;
+}
+
+/* tasks in navbar */
+
+.navbar-btn {
+  margin-top: 14px !important;
+}
+
+.btn-circle {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 10px;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */

@@ -1,17 +1,27 @@
 <IfModule mod_rewrite.c>
         RewriteEngine On
 		
-		#task
+		#show task
 		RewriteRule ^t\/([\w]*)$ show.html?t=$1 [QSA,L]
 		
-		#add
+		#add task
 		RewriteRule ^create$ edit.html [QSA,L]
 		
-		#fork
+		#fork task
 		RewriteRule ^create\/([\w]*)$ edit.html?t=$1 [QSA,L]
+
+		#show collection
+		RewriteRule ^c\/([\w]*)$ show.html?c=$1 [QSA,L]
+		RewriteRule ^c\/([\w]*)\/t\/([\w]*)$ show.html?c=$1&t=$2 [QSA,L]
+
+		#add collection
+		RewriteRule ^createcollection$ collection.html [QSA,L]
+		
+		#fork collection
+		RewriteRule ^createcollection\/([\w]*)$ collection.html?c=$1 [QSA,L]
 		
 		#api1
-		RewriteRule ^api1$ db/api1.php [QSA,L]
-		RewriteRule ^api1\/([\w]*)\.json$ db/api1.php?key=$1 [QSA,L]
+		RewriteRule ^api1/([\w])$ db/api1.php?type=$1 [QSA,L]
+		RewriteRule ^api1\/([\w])\/([\w]*)\.json$ db/api1.php?key=$2&type=$1 [QSA,L]
 		
 </IfModule>

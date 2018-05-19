@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PMS</title>
+    <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/fontawesome-all.min.css' rel='stylesheet'>
+    <link href='/css/app.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/index.html">PMS</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" v-on:click.prevent="resetinput">
+                            <i class="fas fa-undo"></i> Reset</a>
+                    </li>
+                    <li>
+                        <a v-if="c == ''" href="#" v-on:click.prevent="publish">
+                            <i class="fas fa-share-alt"></i> Publish
+                        </a>
+
+                        <a v-else href="#" v-on:click.prevent="publish">
+                                <i class="fas fa-code-branch"></i> Fork
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/docs/#/de-de/readme">
+                            <i class="fas fa-question"></i> Help</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                <div class="drag">
+                    <h2 v-if="c == ''">new Collection</h2>
+                    <h2 v-else>Collection {{ c }}</h2>
+                    <div class="input-group">
+                        <input id="task" v-model="task" type="text" class="form-control" placeholder="task url or token">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" @click="add">Add</button>
+                        </span>
+                    </div>
+                    <br />
+                    <draggable :list="list" class="list-group" tag="ul">
+                        <li class="list-group-item" v-for="(item, key) in list">
+                            <a target="_blank" :href="'/t/' + item.name">{{item.name}}</a>
+                            <span @click="$delete(list, key)" class="badge delete">x</span>
+                        </li>
+                    </draggable>
+                    <div class="alert alert-info" v-if="!list.length" role="alert">Add your desired task above.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 hidden-sm hidden-xs">
+                    <p class="text-muted">(c) wi-wissen.de</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="text-muted">
+                        <a href="https://wi-wissen.de/contact.php">Contact</a> -
+                        <a href="https://wi-wissen.de/contact.php">Report</a> -
+                        <a href="/termsofuse.html">Terms of Use</a> -
+                        <a href="https://wi-wissen.de/datenschutz.html">Privacy</a> -
+                        <a href="https://wi-wissen.de/impressum.html">Impress</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootbox.min.js"></script>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/sortable.min.js"></script>
+    <script src="/js/vuedraggable.min.js"></script>
+    <script src="/js/collection.js"></script>
+</body>
+
+</html>

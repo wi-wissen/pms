@@ -93,9 +93,9 @@ var vm = new Vue({
         var url = new URL(location);
         //var t = url.searchParams.get("t");
         var t = window.location.href.split("/").pop();
-        if (t != null && t != "create" && t != "") {
+        if (t != null && t != "new" && t != "") {
             console.log("it's a fork!");
-            axios.get('/api1/' + t + '.json')
+            axios.get('/api1/t/' + t + '.json')
                 .then(function (response) {
                     //console.log(response);
 
@@ -142,13 +142,13 @@ new Vue({
             video = "";
         },
         publish: function () {
-            axios.post('/api1', {
+            axios.post('/api1/t', {
                 lang: data.lang,
                 enviroment: data.enviroment,
-                task: data.task,
+                task: data.task == undefined ? "" : data.task,
                 autoplay: data.autoplay,
-                video: data.video,
-                description: data.description,
+                video: data.video == undefined ? "" : data.video,
+                description: data.description == undefined ? "" : data.description,
                 html: data.editor_html.getValue(),
                 css: data.editor_css.getValue(),
                 code: data.editor_code.getValue()

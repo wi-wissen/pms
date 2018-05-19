@@ -1,0 +1,6 @@
+<?php 
+
+$saltTask = "secret";
+$saltCollection = "secret";
+
+?>
