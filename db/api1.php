@@ -78,6 +78,8 @@ if(isset($_GET['type'])) {
 			//secure file
 			$j = json_decode($json);
 
+			$j->landingpage = secureURL($j->landingpage);
+
 			foreach($j->list as $item)
 			{
 				preg_match('/([a-zA-Z0-9]+)$/', $item->name, $matches);
@@ -128,6 +130,16 @@ function stripUnwantedTagsAndAttrs($html_str){
 		}
 		return $xml->saveHTML();
 	}
+}
+
+function secureURL($url) {
+	//$url = filter_var($url, FILTER_SANITIZE_STRING);
+
+	if (substr($url, 0, 4) == 'http' && filter_var($url, FILTER_VALIDATE_URL) && filter_var($url, FILTER_SANITIZE_STRING)) {
+		return $url;
+	} else {
+		return "/untrustedurl.html" . "?/" . $bodytag = str_replace("/", "&#47;", htmlspecialchars($url)); ;
 	}
+}
 
 ?>

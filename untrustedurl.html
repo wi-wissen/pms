@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>PMS</title>
+    <link href='/css/bootstrap.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <!-- erst ab hier wird der Inhalt auch im Browser angezeigt. -->
+    <div class="alert alert-danger">
+        The following url seems dangerous. Please think for yourself.
+        <strong>If you are unsure you should ask your parents, teacher or a friend.</strong>
+    </div>
+    <div class="panel panel-default">
+        <div id="app" class="panel-body" v-html=url></div>
+    </div>
+
+    <script src="/js/vue.js"></script>
+    <script>
+
+        var vm = new Vue({
+            el: "#app",
+            data: { url: "" },
+            created() {
+                this.url = window.location.href.split("/").pop();
+                console.log(window.location.href);
+            }
+        })
+    </script>
+</body>
+
+</html>

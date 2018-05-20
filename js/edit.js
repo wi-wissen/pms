@@ -18,13 +18,13 @@ var data = {
     iframehtml: "",
     customToolbar: [
         ['bold', 'italic', 'underline'],
-        [{ 'color': [] }, { 'background': [] }], 
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         ['link', 'image', 'code-block']
     ],
     editorTaskToolbar: [
         ['bold', 'italic', 'underline'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         ['link']
     ],
     editorTaskOptions: {
@@ -55,22 +55,22 @@ function setupEditor() {
     editor.setSession(data.editor_code);
 
     // editor.renderer.lineHeight should be 17, but is in this moment 0 :-(
-        var height = 17 * editor.getSession().getDocument().getLength() + "px";
-        document.getElementById("editor").style.height = height;
-        editor.resize(); 
-    
-        editor.on("change", function() {
-            var editor = ace.edit("editor");                   // the editor object
-            var editorDiv = document.getElementById("editor");     // its container
-            var doc = editor.getSession().getDocument();
-            var lineHeight = editor.renderer.lineHeight;
-            console.log(editorDiv.style.height);
-            
-            editorDiv.style.height = lineHeight * doc.getLength() + "px";
-            editor.resize();
-            console.log(editorDiv.style.height);
-            console.log("updated editor!");
-        });   
+    var height = 17 * editor.getSession().getDocument().getLength() + "px";
+    document.getElementById("editor").style.height = height;
+    editor.resize();
+
+    editor.on("change", function () {
+        var editor = ace.edit("editor");                   // the editor object
+        var editorDiv = document.getElementById("editor");     // its container
+        var doc = editor.getSession().getDocument();
+        var lineHeight = editor.renderer.lineHeight;
+        console.log(editorDiv.style.height);
+
+        editorDiv.style.height = lineHeight * doc.getLength() + "px";
+        editor.resize();
+        console.log(editorDiv.style.height);
+        console.log("updated editor!");
+    });
 }
 
 function fillEditor() {
@@ -87,6 +87,11 @@ function fillEditor() {
 
     var editor = ace.edit("editor");
     editor.setSession(data.editor_code);
+
+    // editor.renderer.lineHeight should be 17, but is in this moment 0 :-(
+    var height = 17 * editor.getSession().getDocument().getLength() + "px";
+    document.getElementById("editor").style.height = height;
+    editor.resize();
 
     console.log("new setting filled in");
 }

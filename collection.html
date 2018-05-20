@@ -70,7 +70,7 @@
                             </div>
                     </form>
                     <div class="input-group">
-                        <input id="task" v-model="task" type="text" class="form-control" placeholder="task url or token">
+                        <input id="task" v-model="input" type="text" class="form-control" placeholder="task/collection url or task token">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" @click="add">Add</button>
                         </span>
@@ -82,7 +82,7 @@
                             <span @click="$delete(list, key)" class="badge delete">x</span>
                         </li>
                     </draggable>
-                    <div class="alert alert-info" v-if="!list.length" role="alert">Add your desired task above.</div>
+                    <div class="alert alert-info" v-if="!list.length" role="alert">Add your desired task or collection above.</div>
                 </div>
             </div>
         </div>

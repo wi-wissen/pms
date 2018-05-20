@@ -2,7 +2,7 @@ var data = {
     name: "",
     landingpage: "",
     list: [],
-    task: "",
+    input: "",
     c: ""      
 }
 
@@ -32,12 +32,36 @@ new Vue({
     data: data,
     methods: {
         add: function () {
-            if (this.task != "") {
-                //get token
+            if (this.input != "") {
+                //add task via url
+                var regex = /t\/([a-zA-Z0-9]+)$/g;
+                var match = regex.exec(this.input);
+                if (match != null) {
+                    this.list.push({ name: match[1] });
+                    this.input = "";
+                }
+
+                //import collection
+                regex = /c\/([a-zA-Z0-9]+)$/g;
+                match = regex.exec(this.input);
+                if (match != null) {
+                    axios.get('/api1/c/' + match[1] + '.json')
+                        .then(function (response) {
+                            vm.list = vm.list.concat(response.data.list);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    this.input = "";
+                }
+
+                //add task via token
                 var regex = /([a-zA-Z0-9]+)$/g;
-                var match = regex.exec(this.task);
-                this.list.push({ name: match[0] });
-                this.task = "";
+                var match = regex.exec(this.input);
+                if (match != null) {
+                    this.list.push({ name: match[0] });
+                    this.input = "";
+                }
             }
         }
     }
