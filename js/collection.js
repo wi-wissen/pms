@@ -1,4 +1,6 @@
 var data = {
+    name: "",
+    landingpage: "",
     list: [],
     task: "",
     c: ""      
@@ -15,6 +17,8 @@ var vm = new Vue({
             axios.get('/api1/c/' + vm.c + '.json')
                 .then(function (response) {
                     vm.list = response.data.list;
+                    vm.name = response.data.name;
+                    vm.landingpage = response.data.landingpage;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -48,7 +52,9 @@ new Vue({
         },
         publish: function () {
             axios.post('/api1/c', {
-                list: data.list
+                list: data.list,
+                landingpage: data.landingpage,
+                name: data.name
             })
                 .then(function (response) {
                     bootbox.alert('Your Collection is now published: <a href="/c/' + response.data.key + '">' + response.data.key + '</a>');

@@ -16,6 +16,8 @@ var data = {
     t: null,
     c: null,
     collection: [],
+    collectionname: "",
+    landingpage: ""
 }
 
 function setupEditor() {
@@ -105,7 +107,9 @@ function loadCollection() {
     .then(function (response) {
         console.log(response);
         //if (response.data.hasOwnProperty('error')) window.location.replace("../index.html");
-        vm.collection = response.data.list;
+        data.collection = response.data.list;
+        data.collectionname = response.data.name;
+        data.landingpage = response.data.landingpage;
         if (data.t == null) data.t = vm.collection[0].name;
 
         loadTask(data.t)
@@ -123,28 +127,28 @@ function loadTask(){
         console.log(response);
         //if (response.data.hasOwnProperty('error')) window.location.replace("../index.html");
 
-        vm.lang = response.data.lang;
-        vm.enviroment = response.data.enviroment;
-        vm.task = response.data.task;
-        vm.autoplay = response.data.autoplay;
-        vm.video = response.data.video;
-        vm.description = response.data.description;
-        vm.html = response.data.html;
-        vm.css = response.data.css;
-        vm.code = response.data.code;
-        vm.code_preset = vm.code;
+        data.lang = response.data.lang;
+        data.enviroment = response.data.enviroment;
+        data.task = response.data.task;
+        data.autoplay = response.data.autoplay;
+        data.video = response.data.video;
+        data.description = response.data.description;
+        data.html = response.data.html;
+        data.css = response.data.css;
+        data.code = response.data.code;
+        data.code_preset = data.code;
 
         for (var i in data.enviroments) {
             if (data.enviroments[i].lang == data.lang &&
                 data.enviroments[i].name == data.enviroment) {
-                vm.n = i;
+                data.n = i;
             }
         }
 
         setupEditor();
 
-        if (vm.autoplay) {
-            var lightbox = lity(vm.video);
+        if (data.autoplay) {
+            var lightbox = lity(data.video);
         }
 
     })

@@ -62,9 +62,6 @@ iframe {
   display:none;
 }
 
-
-
-
 div#editor_task.ql-container .ql-editor{
   width: 100%;
   height: 34px;
@@ -114,11 +111,21 @@ div#editor_task.ql-container .ql-editor:focus, #resourcearea > div.quillWrapper:
 
 /* tasks in navbar */
 
-.navbar-btn {
+.navbar.center .navbar-inner {
+  text-align: center;
+  height: 50px;
+}
+
+.navbar.center .navbar-inner .nav {
+  display:inline-block;
+  float: none;
+}
+
+.navbar-btn-circle {
   margin-top: 14px !important;
 }
 
-.btn-circle {
+.navbar-btn-circle .btn {
   width: 20px;
   height: 20px;
   text-align: center;
@@ -126,6 +133,18 @@ div#editor_task.ql-container .ql-editor:focus, #resourcearea > div.quillWrapper:
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 10px;
+}
+
+.navbar-btn-circle-active {
+  margin-top: 11px !important;
+}
+
+.navbar-btn-circle-active .btn {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 15px;
 }
 
 /* Sticky footer styles
