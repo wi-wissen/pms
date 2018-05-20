@@ -1,15 +1,17 @@
 /* Collums */
   .col-fixed-400{
-    width:400px;
-    position:fixed;
-    height:100%;
-    z-index:1;
-    margin-left: 10px;
+    width: inherit;
+    min-width: 420px;
+    max-width: 420px;
+    padding-right: 5px !important;
+    min-height: 100%;
+    position:relative;
 }
 
-.col-offset-400{
-    padding-left:435px;
-    z-index:0;
+@media (min-width:768px) {
+  .col-offset-400{
+    width:calc(100% - 435px);
+  }
 }
 
 /* Left Side */
@@ -30,8 +32,8 @@ iframe {
     width: 100%;
     position: relative;
     min-height: 400px;
-	/* height: calc(100vh - 148px - 42px - 60px - 25px); */
-	height: calc(100vh - 270px - 50px - 40px);
+	 /*height: calc(100vh - 148px - 42px - 60px - 25px); 
+	 min-height: calc(100vh - 300px - 60px);*/
 }
 
 /* Content */
@@ -111,14 +113,16 @@ div#editor_task.ql-container .ql-editor:focus, #resourcearea > div.quillWrapper:
 
 /* tasks in navbar */
 
-.navbar.center .navbar-inner {
-  text-align: center;
-  height: 50px;
-}
-
-.navbar.center .navbar-inner .nav {
-  display:inline-block;
-  float: none;
+@media (min-width:768px) {
+  .navbar.center .navbar-inner {
+    text-align: center;
+    height: 50px;
+  }
+  
+  .navbar.center .navbar-inner .nav {
+    display:inline-block;
+    float: none;
+  }
 }
 
 .navbar-btn-circle {

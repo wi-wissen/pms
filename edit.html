@@ -46,7 +46,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-fixed-400">
+            <div class="col-md-3 col-sm-3 col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
                     <button class="btn btn-primary pull-right" v-on:click="play">
@@ -71,7 +71,7 @@
                     <vue-editor id="editor_description" v-model="description" :editor-toolbar="customToolbar"></vue-editor>
                 </div>
             </div>
-            <div class="col-md-12 col-offset-400">
+            <div class="col-md-9 col-sm-12 col-offset-400">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label for="task" class="col-sm-2 control-label">Task</label>

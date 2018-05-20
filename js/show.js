@@ -29,7 +29,7 @@ function setupEditor() {
         enableLiveAutocompletion: true,
         showPrintMargin: false
     });
-
+ 
     var EditSession = ace.require("ace/edit_session").EditSession;
     console.log(data.n);
     data.editor_code = null;
@@ -56,6 +56,23 @@ function setupEditor() {
 
     editor.setSession(data.editor_code);
 
+    // editor.renderer.lineHeight should be 17, but is in this moment 0 :-(
+    var height = 17 * editor.getSession().getDocument().getLength() + "px";
+    document.getElementById("editor").style.height = height;
+    editor.resize(); 
+
+    editor.on("change", function() {
+        var editor = ace.edit("editor");                   // the editor object
+        var editorDiv = document.getElementById("editor");     // its container
+        var doc = editor.getSession().getDocument();
+        var lineHeight = editor.renderer.lineHeight;
+        console.log(editorDiv.style.height);
+        
+        editorDiv.style.height = lineHeight * doc.getLength() + "px";
+        editor.resize();
+        console.log(editorDiv.style.height);
+        console.log("updated editor!");
+    });   
 }
 
 
@@ -169,7 +186,7 @@ new Vue({
 
 new Vue({
     el: '#editorarea',
-    data: data,
+    data: data
 })
 
 new Vue({

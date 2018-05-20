@@ -16,7 +16,7 @@
     <nav id="navbar" class="navbar navbar-default navbar-fixed-top center">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false"
                     aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -29,10 +29,10 @@
             <div class="navbar-inner">
             <div class="collapse navbar-collapse">
                 <ul v-if="collection.length" class="nav navbar-nav">
-                        <li v-if="landingpage">
-                            <a target="_blank" :href="landingpage">{{collectionname}}</a>
-                        </li>
-                    <li v-for="(task, key) in collection" class="hidden-xs">
+                    <li v-if="landingpage">
+                        <a target="_blank" :href="landingpage">{{collectionname}}</a>
+                    </li>
+                    <li v-for="(task, key) in collection">
                         <p v-if="t !== task.name" class="navbar-btn-circle">
                             <a :href="'/c/' + c + '/t/' + task.name" class="btn btn-default"></a>&nbsp;
                         </p>
@@ -63,7 +63,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-fixed-400">
+            <div class="col-md-3 col-sm-3 col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
                     <button class="btn btn-primary pull-right" v-on:click="play">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-offset-400">
+            <div class="col-md-9 col-sm-12 col-offset-400">
                 <div id="editorarea" v-show="lang">
                     <div v-if="task !== ''  && task !== false" class="panel panel-default">
                         <div class="panel-heading">Task</div>
