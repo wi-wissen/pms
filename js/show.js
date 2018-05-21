@@ -55,6 +55,7 @@ function setupEditor() {
     console.log("editor built");
 
     editor.setSession(data.editor_code);
+    editor.getSession().setUndoManager(new ace.UndoManager());
 
     // editor.renderer.lineHeight should be 17, but is in this moment 0 :-(
     var height = 17 * editor.getSession().getDocument().getLength() + "px";
@@ -66,12 +67,9 @@ function setupEditor() {
         var editorDiv = document.getElementById("editor");     // its container
         var doc = editor.getSession().getDocument();
         var lineHeight = editor.renderer.lineHeight;
-        console.log(editorDiv.style.height);
         
         editorDiv.style.height = lineHeight * doc.getLength() + "px";
         editor.resize();
-        console.log(editorDiv.style.height);
-        console.log("updated editor!");
     });   
 }
 

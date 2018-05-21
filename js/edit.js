@@ -87,6 +87,7 @@ function fillEditor() {
 
     var editor = ace.edit("editor");
     editor.setSession(data.editor_code);
+    editor.getSession().setUndoManager(new ace.UndoManager());
 
     // editor.renderer.lineHeight should be 17, but is in this moment 0 :-(
     var height = 17 * editor.getSession().getDocument().getLength() + "px";

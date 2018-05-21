@@ -610,7 +610,10 @@ cw.preload(async function () { //you have to wait that all images are loaded
     userprogramm = userprogramm.replace(/kara.turnLeft/g,"await kara.turnLeft");
     userprogramm = userprogramm.replace(/kara.turnRight/g,"await kara.turnRight");
 	userprogramm = userprogramm.replace(/kara.putLeaf/g,"await kara.putLeaf");
-	userprogramm = userprogramm.replace(/kara.removeLeaf/g,"await kara.removeLeaf");
+    userprogramm = userprogramm.replace(/kara.removeLeaf/g,"await kara.removeLeaf");
+    userprogramm = userprogramm.replace(/alert\(/g,"await alert(");
+    userprogramm = userprogramm.replace(/prompt\(/g,"await prompt(");
+    userprogramm = userprogramm.replace(/confirm\(/g,"await confirm(");
     console.log(userprogramm);
     
     var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;

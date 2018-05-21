@@ -1,5 +1,7 @@
 * [ada7.de](de-de/readme.md)
-* [Programmiersprachen](de-de/languages.md)
+* [unterstützte Programmiersprachen](de-de/languages.md)
+* Programmiersprachen
+  * [JavaScript](de-de/javascript.md)
 * JavaScript-Umgebungen
   * [Konsole](de-de/console.md)
   * [Dialoge](de-de/modal.md)

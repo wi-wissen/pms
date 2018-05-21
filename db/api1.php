@@ -101,6 +101,7 @@ else {
 	echo json_encode(array('error' => 'unknown typ'));
 }
 
+//http://php.net/manual/en/function.strip-tags.php#119909
 function stripUnwantedTagsAndAttrs($html_str){
 	if ($html_str == "") {
 		return "";		
@@ -112,7 +113,7 @@ function stripUnwantedTagsAndAttrs($html_str){
 		//List the tags you want to allow here, NOTE you MUST allow html and body otherwise entire string will be cleared
 		$allowed_tags = array("a", "b", "strong", "br", "em", "hr", "i", "li", "ol", "p", "s", "span", "table", "tr", "td", "u", "ul", "pre", "code", "img");
 		//List the attributes you want to allow here
-		$allowed_attrs = array ("class", "id", "style", "src", "href", "spellcheck");
+		$allowed_attrs = array ("class", "id", "style", "src", "href", "target", "spellcheck");
 		if (!strlen($html_str)){return "";}
 		//if ($xml->loadHTML($html_str, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD)){
 		if ($xml->loadHTML(mb_convert_encoding($html_str, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD)){
@@ -121,9 +122,14 @@ function stripUnwantedTagsAndAttrs($html_str){
 					$tag->parentNode->removeChild($tag);
 				}else{
 					foreach ($tag->attributes as $attr){
-					if (!in_array($attr->nodeName, $allowed_attrs)){
-						$tag->removeAttribute($attr->nodeName);
-					}
+						//remove not allowed attributes
+						if (!in_array($attr->nodeName, $allowed_attrs)){
+							$tag->removeAttribute($attr->nodeName);
+						}
+						//secure url in src and href urls
+						if ($attr->nodeName == "src" || $attr->nodeName == "href") {
+							$attr->nodeValue = secureURL(htmlspecialchars_decode($attr->nodeValue));
+						}
 					}
 				}
 			}
@@ -133,12 +139,14 @@ function stripUnwantedTagsAndAttrs($html_str){
 }
 
 function secureURL($url) {
-	//$url = filter_var($url, FILTER_SANITIZE_STRING);
+	$secureurl = $url;
+	$secureurl = filter_var($secureurl, FILTER_VALIDATE_URL);
+	$secureurl = filter_var($secureurl, FILTER_SANITIZE_STRING);
 
-	if (substr($url, 0, 4) == 'http' && filter_var($url, FILTER_VALIDATE_URL) && filter_var($url, FILTER_SANITIZE_STRING)) {
+	if (substr($url, 0, 4) == 'http' &&  $secureurl == $url) {
 		return $url;
 	} else {
-		return "/untrustedurl.html" . "?/" . $bodytag = str_replace("/", "&#47;", htmlspecialchars($url)); ;
+		return "/untrustedurl.html" . "?/" . str_replace("/", "&#47;", htmlspecialchars($url));
 	}
 }
 

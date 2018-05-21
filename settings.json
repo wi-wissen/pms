@@ -37,12 +37,33 @@
                 "/enviroments/js-sokoban/css/sokoban.css"
             ],
             "codefiles": [
-                "/enviroments/js-sokoban/js/sokoban.js"
+                "/enviroments/js-sokoban/js/sokoban-forked.js"
             ],
             "codefilesafter": [],
             "html": "",
             "css": "",
-            "code": "window.onload = function () {\n    w = 32; //cellsize\n    margin = 2; //margin inside cell\n    wait = 800; //wait between each move and turn of kara\n    style = 'icon8_ios'; // classic, flaticon, icon8_color, icon8_ios, icon8_office\n\n    /*\n        #: Baum\n        @: Kara\n        .: Blatt\n        $: Pilz\n        *: Pilz auf einem Blatt\n        +: Kara auf einem Blatt\n    \n    */\n    // be aware that space in front of line are interpretated as empty fields\n    karasworld = `world:\n#####\n# .. #\n#$@  #\n# *  #\n######`\n\n    setup();\n}\n\nfunction run() {\n    kara.move();\n    kara.move();\n    kara.turnLeft();\n    kara.move();\n}"
+            "code": "w = 32; \/\/cellsize in px\r\nmargin = 2; \/\/margin inside cell in px\r\nwait = 800; \/\/wait between each move and turn of kara in ms\r\nstyle = \"flaticon\"; \/\/ use: classic, flaticon, icon8_color, icon8_ios or icon8_office\r\n\r\n\/*\r\n\t#: Baum\r\n\t@: Kara\r\n\t.: Kleeblatt (Erdbeere)\r\n\t$: Fliegenpilz\r\n\t*: Fliegenpilz auf einem Kleeblatt (Erdbeere)\r\n\t+: Kara auf einem Kleeblatt (Erdbeere)\r\n*\/\r\n\r\n\/\/ Alle Leerzeichen vor der Welt werden als leere Felder interpretiert.\r\nkarasworld = `world:\r\n#####\r\n# .. #\r\n# @$ #\r\n# *  #\r\n######`\r\n\r\n\/\/Alle vorherigen Einstellungen sind optional. \r\n\/\/ Der folgende Befehl muss ausgef\u00FChrt werden:\r\nsetup();\r\n\r\n\/*\r\nkara\r\n\tSensoren: onLeaf(), treeFront(), treeLeft(), treeRight(), mushroomFront()\r\n\tAktoren: move(), turnLeft(), turnRight(), putLeaf(), removeLeaf()\r\n*\/\r\nfunction run() {\r\n\tkara.move();\r\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "name": "SokobanIO",
+            "type": "text/javascript",
+            "acemode": "javascript",
+            "cssfiles": [
+                "/enviroments/bootstrap-jquery/css/bootstrap.min.css",
+                "/enviroments/js-sokoban/css/sokoban.css"
+            ],
+            "codefiles": [
+                "/enviroments/bootstrap-jquery/js/jquery-3.3.1.min.js",
+                "/enviroments/bootstrap-jquery/js/bootstrap.min.js",
+                "/enviroments/bootstrap-jquery/js/bootbox.min.js",
+                "/enviroments/bootstrap-jquery/js/alert.js",
+                "/enviroments/js-sokoban/js/sokoban-forked.js"
+            ],
+            "codefilesafter": [],
+            "html": "",
+            "css": "",
+            "code": "w = 32; \/\/cellsize in px\r\nmargin = 2; \/\/margin inside cell in px\r\nwait = 800; \/\/wait between each move and turn of kara in ms\r\nstyle = \"flaticon\"; \/\/ use: classic, flaticon, icon8_color, icon8_ios or icon8_office\r\n\r\n\/*\r\n\t#: Baum\r\n\t@: Kara\r\n\t.: Kleeblatt (Erdbeere)\r\n\t$: Fliegenpilz\r\n\t*: Fliegenpilz auf einem Kleeblatt (Erdbeere)\r\n\t+: Kara auf einem Kleeblatt (Erdbeere)\r\n*\/\r\n\r\n\/\/ Alle Leerzeichen vor der Welt werden als leere Felder interpretiert.\r\nkarasworld = `world:\r\n#####\r\n# .. #\r\n# @$ #\r\n# *  #\r\n######`\r\n\r\n\/\/Alle vorherigen Einstellungen sind optional. \r\n\/\/ Der folgende Befehl muss ausgef\u00FChrt werden:\r\nsetup();\r\n\r\n\/*\r\nkara\r\n\tSensoren: onLeaf(), treeFront(), treeLeft(), treeRight(), mushroomFront()\r\n\tAktoren: move(), turnLeft(), turnRight(), putLeaf(), removeLeaf()\r\n\t\r\nalert(text), prompt(text), confirm(text)\r\n*\/\r\nfunction run() {\r\n\tkara.move();\r\n\talert(\"Das war karas erster Schritt!\");\r\n\tkara.turnLeft();\r\n}"
         },
         {
             "lang": "JavaScript",

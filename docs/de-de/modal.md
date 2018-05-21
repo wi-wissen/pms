@@ -1,36 +1,30 @@
 # Dialoge
 
-Eine oft verwendete Möglichkeit, um ohne eine GUI zu programmieren Benutzereingaben zu erhalten, ist es, dass Dialoge wie etwa `alert()` angezeigt werden. Da diese aus Sicherheitsgründen deaktiviert sind, kann hier eine alternative Implementierung durch [Bootbox.js](http://bootboxjs.com/) verwendet werden:
+i> Anstelle von Dialogen ist es oft sinnvoll, eine kleine Oberfläche in HTML zu erstellen. 
 
-![bootbox](img/bootbox.png)
+Eine oft verwendete Möglichkeit, um ohne eine GUI zu programmieren Benutzereingaben zu erhalten, ist es, dass Dialoge wie etwa `alert()` angezeigt werden. Da diese aus Sicherheitsgründen deaktiviert sind, kann hier eine alternative Implementierung durch [Bootbox.js](http://bootboxjs.com/) verwendet werden:
 
 ```js
 bootbox.alert("alert() mit Bootbox");
 ```
 
-Bootbox hat den Vorteil, dass es sich zum einen vom "Look and Feel" besser in die Webseite einfügt und zum anderen, dass es mehr Funktionen und Gestaltungsmöglichkeiten bietet.
+![bootbox](img/bootbox.png)
 
 [Hier sind die vielen Funktionen mit Beispielen](http://bootboxjs.com/examples.html) gut beschrieben.
 
-Zur Vorbereitung auf spätere Aufgaben in Programmierumgebungen, können die Bootbox-Dialoge ähnlich der Konsolenausgabe auch mit den bekannten Befehlen ausgeführt werden:
+w>Bootbox is `non-blocking`. Das Programm wartet folglich nicht auf die Benutzereingabe und wird einfach weiter ausgeführt. Das ist für Programmieranfänger umständlich, entspricht aber besserem Programmverhalten. 
 
-```js
-alert("alert() mit Bootbox");
+Um den Einsteig zu erleichtern kann in den unterstützten Umgebungen folgender Workaround verwendet werden:
+
+```javascript
+async function run() {
+	await alert("hi");
+	var name = await prompt("Wie heißt du?");
+	await alert("Du heißt " + name);
+	await alert('Du bestätigst' + (await confirm("Bestätigst du?") ? '.' : ' nicht.'));
+}
+
+run();
 ```
 
-Dazu müssen die benötigten Funktionen einfach wieder überschrieben werden:
-
-```js
-function alert(message) { 
-    bootbox.alert(message);
-} 
-
-function prompt(message) { 
-    bootbox.prompt(message, function(result){ return result; })
-} 
-
-function confirm(message) { 
-    bootbox.confirm(message, function(result){ return result; })
-} 
-```
-
+w> die Schlüsselwörter `async` und `await` sind essentiell.

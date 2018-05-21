@@ -7,33 +7,31 @@ Für diese Umgebung wurde [JavaScriptKara](http://www.swisseduc.ch/informatik/ka
 Die Umgebung wird wie folgt eingesetzt:
 
 ```js
-window.onload = function () {
-	w = 32; //cellsize in px
-	margin = 2; //margin inside cell in px
-	wait = 800; //wait between each move and turn of kara in ms
-	style = "flaticon"; // use: classic, flaticon, icon8_color, icon8_ios or icon8_office
+w = 32; //cellsize in px
+margin = 2; //margin inside cell in px
+wait = 800; //wait between each move and turn of kara in ms
+style = "flaticon"; // use: classic, flaticon, icon8_color, icon8_ios or icon8_office
 
-	/*
-		#: Baum
-		@: Kara
-		.: Kleeblatt (Erdbeere)
-		$: Fliegenpilz
-		*: Fliegenpilz auf einem Kleeblatt (Erdbeere)
-		+: Kara auf einem Kleeblatt (Erdbeere)
-	
-	*/
-	// Alle Leerzeichen vor der Welt werden als leere Felder interpretiert.
-	karasworld = `world:
+/*
+	#: Baum
+	@: Kara
+	.: Kleeblatt (Erdbeere)
+	$: Fliegenpilz
+	*: Fliegenpilz auf einem Kleeblatt (Erdbeere)
+	+: Kara auf einem Kleeblatt (Erdbeere)
+*/
+
+// Alle Leerzeichen vor der Welt werden als leere Felder interpretiert.
+karasworld = `world:
 #####
 # .. #
 # @$ #
 # *  #
 ######`
 
-    //Alle vorherigen Einstellungen sind optional. 
-    // Der folgende Befehl muss ausgeführt werden:
-	setup();
-}
+//Alle vorherigen Einstellungen sind optional. 
+// Der folgende Befehl muss ausgeführt werden:
+setup();
 
 /*
 kara

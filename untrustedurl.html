@@ -15,7 +15,7 @@
         <strong>If you are unsure you should ask your parents, teacher or a friend.</strong>
     </div>
     <div class="panel panel-default">
-        <div id="app" class="panel-body" v-html=url></div>
+        <pre id="app" class="panel-body" v-html=url></pre>
     </div>
 
     <script src="/js/vue.js"></script>
@@ -25,7 +25,7 @@
             el: "#app",
             data: { url: "" },
             created() {
-                this.url = window.location.href.split("/").pop();
+                this.url = decodeURI(window.location.href.split("html?/").pop());
                 console.log(window.location.href);
             }
         })
