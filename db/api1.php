@@ -140,10 +140,12 @@ function stripUnwantedTagsAndAttrs($html_str){
 
 function secureURL($url) {
 	$secureurl = $url;
-	$secureurl = filter_var($secureurl, FILTER_VALIDATE_URL);
+	if (substr($url, 0, 10) != 'data:image') $secureurl = filter_var($secureurl, FILTER_VALIDATE_URL);
 	$secureurl = filter_var($secureurl, FILTER_SANITIZE_STRING);
 
-	if (substr($url, 0, 4) == 'http' &&  $secureurl == $url) {
+	//echo (filter_var($url, FILTER_VALIDATE_URL) ? "yes" : "no");
+
+	if ((substr($url, 0, 4) == 'http' || substr($url, 0, 10) == 'data:image') &&  $secureurl == $url) {
 		return $url;
 	} else {
 		return "/untrustedurl.html" . "?/" . str_replace("/", "&#47;", htmlspecialchars($url));

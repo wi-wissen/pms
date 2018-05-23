@@ -64,12 +64,9 @@ function setupEditor() {
         var editorDiv = document.getElementById("editor");     // its container
         var doc = editor.getSession().getDocument();
         var lineHeight = editor.renderer.lineHeight;
-        console.log(editorDiv.style.height);
 
         editorDiv.style.height = lineHeight * doc.getLength() + "px";
         editor.resize();
-        console.log(editorDiv.style.height);
-        console.log("updated editor!");
     });
 }
 

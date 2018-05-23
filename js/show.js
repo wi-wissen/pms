@@ -70,7 +70,7 @@ function setupEditor() {
         
         editorDiv.style.height = lineHeight * doc.getLength() + "px";
         editor.resize();
-    });   
+    });       
 }
 
 
@@ -166,6 +166,8 @@ function loadTask(){
             var lightbox = lity(data.video);
         }
 
+        run(true);
+
     })
     .catch(function (error) {
         console.log(error);
@@ -177,7 +179,7 @@ new Vue({
     data: data,
     methods: {
         resetinput: function () {
-            this.editor_code.setValue(data.code_preset)
+            setupEditor();
         }
     }
 })
@@ -206,42 +208,50 @@ new Vue({
     data: data,
     methods: {
         play: function () {
-
-            var css = "";
-            var code = "";
-            var _editor_code = "";
-
-            //show only wanted parts of code
-            var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|([\\s\\S]*))", "im");
-            var result = re.exec(data.code);
-            console.log('result');
-            console.log(result);
-
-            if (result == null) {
-                _editor_code = this.editor_code.getValue();
-            } else {
-                _editor_code = data.code.replace(result[0], this.editor_code.getValue());
-            }            
-
-            for (var i in this.enviroments[this.n].cssfiles) {
-                css = css + "<link href='" + this.enviroments[this.n].cssfiles[i] + "' rel='stylesheet'>";
-            }
-            css = css + "<style>" + this.css + "</style>";
-
-            for (var i in this.enviroments[this.n].codefiles) {
-                code = code + "<script src='" + this.enviroments[this.n].codefiles[i] + "'></script>";
-            }
-            code = code + "<script type='" + this.enviroments[this.n].type + "'>" + _editor_code + "</script>";
-            for (var i in this.enviroments[this.n].codefilesafter) {
-                code = code + "<script src='" + this.enviroments[this.n].codefilesafter[i] + "'></script>";
-            }
-
-            this.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
-                + "<!-- created:" + new Date() + " -->"
-                + css + "</head><body>"
-                + this.html + code + "</body></html>";
-            console.log(this.iframehtml);
+            run();
+        },
+        reset: function () {
+            run(true);
         }
     }
 })
 
+function run(initial) {
+    initial = initial || false;
+    var css = "";
+    var code = "";
+    var _editor_code = "";
+
+    //show only wanted parts of code
+    var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|([\\s\\S]*))", "im");
+    var result = re.exec(data.code);
+    console.log('result');
+    console.log(result);
+
+    if (initial) _editor_code = data.enviroments[data.n].codeoninitialrun;
+
+    if (result == null) {
+        _editor_code = _editor_code + data.editor_code.getValue();
+    } else {
+        _editor_code = _editor_code + data.code.replace(result[0], data.editor_code.getValue());
+    }            
+
+    for (var i in data.enviroments[data.n].cssfiles) {
+        css = css + "<link href='" + data.enviroments[data.n].cssfiles[i] + "' rel='stylesheet'>";
+    }
+    css = css + "<style>" + data.css + "</style>";
+
+    for (var i in data.enviroments[data.n].codefiles) {
+        code = code + "<script src='" + data.enviroments[data.n].codefiles[i] + "'></script>";
+    }
+    code = code + "<script type='" + data.enviroments[data.n].type + "'>" + _editor_code + "</script>";
+    for (var i in data.enviroments[data.n].codefilesafter) {
+        code = code + "<script src='" + data.enviroments[data.n].codefilesafter[i] + "'></script>";
+    }
+
+    data.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+        + "<!-- created:" + new Date() + " -->"
+        + css + "</head><body>"
+        + data.html + code + "</body></html>";
+    console.log(data.iframehtml);
+}

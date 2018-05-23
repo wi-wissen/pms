@@ -66,18 +66,22 @@
             <div class="col-md-3 col-sm-3 col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
+                    <button v-if="enviroments[n].codeoninitialrun" class="btn btn-default" v-on:click="reset">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
                     <button class="btn btn-primary pull-right" v-on:click="play">
-                        <i class="fas fa-play"></i> Run</button>
+                        <i class="fas fa-play"></i> Run
+                    </button>
                 </div>
                 <br />
                 <div id="resourcearea">
-                    <div v-if="video !== '' && video !== '#description' && video !== false" class="list-group">
+                    <div v-if="video !== '' && video !== false" class="list-group">
                         <a v-if="autoplay" v-bind:href="video" data-lity class="list-group-item">
                             <i class="fas fa-play-circle"></i> see intro again</a>
                         <a v-else v-bind:href="video" data-lity class="list-group-item">
                             <i class="fas fa-play-circle"></i> get help</a>
                     </div>
-                    <div id="description" class="panel panel-default" v-if="description !== ''   && task !== false">
+                    <div id="description" class="panel panel-default" v-if="description !== '' && task !== false && video !== '#description'">
                         <div class="panel-body" v-html=description>
                         </div>
                     </div>

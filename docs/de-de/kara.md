@@ -58,3 +58,27 @@ function run() {
 ```
 
 Die Syntax um eine Welt für Kara zu erstellen ist mit [GreenfootKara](https://github.com/marcojakob/greenfoot-kara) kompatibel.
+
+## Ein- und Ausgaben
+
+Die Befehle `alert`, `prompt` und `confirm` wurden in **SokobanIO** implementiert, sodass diese genau wie die [JavaScript-Funktionen](https://www.w3schools.com/js/js_popup.asp) funktionieren.
+
+## Funktionen
+
+Die `run()` Funktion wird im Hintergrund als `async run()` ausgeführt. Das ist wichtig, da alles `kara` Funktionen mit `await` ausgeführt werden. Möchte man eigene Funktionen definieren, so müssen diese **innerhalb** der `run()` Funktion definiert werden und zusätzlich, das Schlüsselwort `async` tragen:
+
+```javascript
+function run() {
+
+	async function springer() {
+		kara.move();
+		kara.turnRight();
+		kara.move();
+		kara.move();
+	}
+	
+	springer();
+}
+```
+
+t> Falls jemand eine Idee hat, wie man mit einem regulären Ausdruck einen Funktionsaufruf von einer Funktionsdefinition unterscheiden kann, wäre ich sehr dankbar.

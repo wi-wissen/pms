@@ -600,6 +600,9 @@ cw = new canvasWorld(style);
 cw.preload(async function () { //you have to wait that all images are loaded
     refresh();
 
+    //does not run on inital build (load page or reset playground)
+    if (typeof adaFirstRun !== 'undefined') return;
+
     var userprogramm = run.toString();
     userprogramm = userprogramm.trim();
     userprogramm = userprogramm.substring(0, userprogramm.length - 1); // remove '}'
