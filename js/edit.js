@@ -16,6 +16,8 @@ var data = {
     enviroment_preset: "",
     lang_preset: "",
     iframehtml: "",
+    world: 1,
+    activeeditor: "code",
     customToolbar: [
         ['bold', 'italic', 'underline'],
         [{ 'color': [] }, { 'background': [] }],
@@ -67,6 +69,28 @@ function setupEditor() {
 
         editorDiv.style.height = lineHeight * doc.getLength() + "px";
         editor.resize();
+    });
+
+    editor.commands.addCommand({
+        name: "beautifyCommand1",
+        bindKey: { win: "Ctrl-B", mac: "Command-Option-B" },
+        exec: function () {
+            if (data.enviroments[data.n].acemode == "javascript" && data.activeeditor == "code") {
+                data.editor_code.setValue(js_beautify(data.editor_code.getValue()));
+                console.log("beautified");
+            }
+            else if (data.activeeditor == "html") {
+                data.editor_html.setValue(html_beautify(data.editor_html.getValue()));
+                console.log("beautified");
+            }
+            else if (data.activeeditor == "css") {
+                data.editor_css.setValue(css_beautify(data.editor_css.getValue()));
+                console.log("beautified");
+            }
+            else {
+                console.log("Sorry language is not supported");
+            }
+        }
     });
 }
 
@@ -127,10 +151,10 @@ var vm = new Vue({
                     vm.video = response.data.video;
                     vm.description = response.data.description;
 
-                    for (var i in data.enviroments) {
-                        if (data.enviroments[i].lang == data.lang &&
-                            data.enviroments[i].name == data.enviroment) {
-                            vm.n = i;
+                    for (i = 0; i < vm.enviroments.length; ++i) {
+                        if (vm.enviroments[i].lang == vm.lang &&
+                            vm.enviroments[i].name == vm.enviroment) {
+                            vm.n = parseInt(i);
                         }
                     }
 
@@ -141,6 +165,9 @@ var vm = new Vue({
                     vm.code = response.data.code;
                     vm.lang_preset = vm.lang;
                     vm.enviroment_preset = vm.enviroment;
+
+                    //get data from sessionStorage if exists
+                    if (sessionStorage.getItem(t)) vm.code = sessionStorage.getItem(t);
 
                     var editor = ace.edit("editor");
                     editor.setSession(vm.editor_code);
@@ -241,14 +268,17 @@ new Vue({
         edithtml: function () {
             var editor = ace.edit("editor");
             editor.setSession(this.editor_html);
+            this.activeeditor = "html";
         },
         editcss: function () {
             var editor = ace.edit("editor");
             editor.setSession(this.editor_css);
+            this.activeeditor = "css";
         },
         editcode: function () {
             var editor = ace.edit("editor");
             editor.setSession(this.editor_code);
+            this.activeeditor = "code";
         }
     },
     created: function () {
@@ -271,28 +301,61 @@ new Vue({
     data: data,
     methods: {
         play: function () {
-            var css = "";
-            var code = "";
+            run();
+        }
+    },
+    updated() {
+        $(this.$refs.select).selectpicker('refresh')
+    },
+    computed: {
+        worlds: function () {
+            var a = [];
+            var _editor_code = "";
+            if (typeof data.enviroments[data.n] !== 'undefined' && data.editor_code !== null) {
+                console.log(data.editor_code.getValue().split(data.enviroments[data.n].worldkeyword));
+                if (data.enviroments[data.n].worldkeyword) {
+                    var n = data.editor_code.getValue().split(data.enviroments[data.n].worldkeyword).length - 4; //remove 3 for def, setting index and index
 
-            for (var i in data.enviroments[this.n].cssfiles) {
-                css = css + "<link href='" + data.enviroments[this.n].cssfiles[i] + "' rel='stylesheet'>";
+                    for (i = 0; i < n; i++) {
+                        a.push(i + 1);
+                    }
+                }
             }
-            css = css + "<style>" + data.editor_css.getValue() + "</style>";
 
-            for (var i in data.enviroments[this.n].codefiles) {
-                code = code + "<script src='" + data.enviroments[this.n].codefiles[i] + "'></script>";
-            }
-            code = code + "<script type='" + data.enviroments[this.n].type + "'>" + data.editor_code.getValue() + "</script>";
-            for (var i in data.enviroments[this.n].codefilesafter) {
-                code = code + "<script src='" + data.enviroments[this.n].codefilesafter[i] + "'></script>";
-            }
-
-
-            this.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
-                + "<!-- created:" + new Date() + " -->"
-                + css + "</head><body>"
-                + data.editor_html.getValue() + code + "</body></html>";
-            console.log(this.iframehtml);
+            return a;
+        }
+    },
+    watch: {
+        world: function () {
+            run();
         }
     }
 })
+
+function run() {
+    var css = "";
+            var code = "";
+
+            var _editor_code = data.editor_code.getValue();
+            if (data.enviroments[data.n].worldkeyword) _editor_code = _editor_code.replace(data.enviroments[data.n].worldkeyword + "N", data.world - 1);
+
+            for (var i in data.enviroments[data.n].cssfiles) {
+                css = css + "<link href='" + data.enviroments[data.n].cssfiles[i] + "' rel='stylesheet'>";
+            }
+            css = css + "<style>" + data.editor_css.getValue() + "</style>";
+
+            for (var i in data.enviroments[data.n].codefiles) {
+                code = code + "<script src='" + data.enviroments[data.n].codefiles[i] + "'></script>";
+            }
+            code = code + "<script type='" + data.enviroments[data.n].type + "'>" + _editor_code + "</script>";
+            for (var i in data.enviroments[data.n].codefilesafter) {
+                code = code + "<script src='" + data.enviroments[data.n].codefilesafter[i] + "'></script>";
+            }
+
+
+            data.iframehtml = "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+                + "<!-- created:" + new Date() + " -->"
+                + css + "</head><body>"
+                + data.editor_html.getValue() + code + "</body></html>";
+            console.log(data.iframehtml);
+}

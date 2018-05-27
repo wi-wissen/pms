@@ -103,6 +103,7 @@ Du kannst neben den bestehenden Umgebungen neue erschaffen. Alle Umgebungen werd
 	"html": "<pre id='output' ></pre> <!-- If you want turtle graphics include a canvas --> <div id='mycanvas'></div> ",
 	"css": "",
   	"codeoninitialrun": "adaFirstRun = true;",
+  	"worldkeyword": "karasworlds",
 	"code": "import turtle \nt = turtle.Turtle() \nt.forward(100) \nprint 'Hello World'"
 }
 ```
@@ -121,6 +122,7 @@ Es ist empfehlenswert für die neue Umgebung in dem Ordner `enviroments` einen e
 | html             | was im HTML-Editor stehen soll           |
 | css              | was im Programm-Editor stehen soll       |
 | codeoninitialrun | (optional) Wird mit ausgeführt wenn die Seite geladen wird oder "Reset" gedrückt wird. Dadurch ist es etwa bei JavaScriptKara möglich, dass nur die Welt geladen wird, Kara aber noch nicht losläuft. |
+| worldkeyword     | (optional) Hiermit können mehre verschiedene Welten zum Testen verwendet werden. Etwa praktisch, um das Verwenden von Schleifen zu erzwingen. Folgendes Vorgehen wird erwartet: Definieren der Variable im Skript als Array. Füllen mit `karasworlds.push()` und dann zuweisen der tatsächlichen Variable mit  `karasworld = karasworlds[karasworldsN];` Die Umgebung zählt selbstständig die Verwendung der Variable und zieht genau 3 Vorkommen (Definition, Zuweisung, Index innerhalb der Zuweisung) ab. |
 | code             | was im CSS-Editor stehen soll            |
 
 ### Plattform

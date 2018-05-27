@@ -65,20 +65,6 @@ Die Befehle `alert`, `prompt` und `confirm` wurden in **SokobanIO** implementier
 
 ## Funktionen
 
-Die `run()` Funktion wird im Hintergrund als `async run()` ausgeführt. Das ist wichtig, da alles `kara` Funktionen mit `await` ausgeführt werden. Möchte man eigene Funktionen definieren, so müssen diese **innerhalb** der `run()` Funktion definiert werden und zusätzlich, das Schlüsselwort `async` tragen:
+Möchte man eigene Funktionen definieren, so müssen diese **innerhalb** der `run()` Funktion definiert werden.
 
-```javascript
-function run() {
-
-	async function springer() {
-		kara.move();
-		kara.turnRight();
-		kara.move();
-		kara.move();
-	}
-	
-	springer();
-}
-```
-
-t> Falls jemand eine Idee hat, wie man mit einem regulären Ausdruck einen Funktionsaufruf von einer Funktionsdefinition unterscheiden kann, wäre ich sehr dankbar.
+Die `run()` Funktion wird im Hintergrund als `async run()` ausgeführt. Alle eigenen Funktionen werden im Hintergrund ebenfalls mit dem Schlüsselwort `async`  versehen und mit dem Schlüsselwort `await` ausgeführt.

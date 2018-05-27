@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>PMS</title>
     <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/bootstrap-select.min.css' rel='stylesheet'>
     <link href='/css/fontawesome-all.min.css' rel='stylesheet'>
     <link href='/css/lity.min.css' rel='stylesheet'>
     <link href='/css/app.css' rel='stylesheet'>
@@ -27,35 +28,35 @@
                 <a class="navbar-brand" href="/index.html">PMS</a>
             </div>
             <div class="navbar-inner">
-            <div class="collapse navbar-collapse">
-                <ul v-if="collection.length" class="nav navbar-nav">
-                    <li v-if="landingpage">
-                        <a target="_blank" :href="landingpage">{{collectionname}}</a>
-                    </li>
-                    <li v-for="(task, key) in collection">
-                        <p v-if="t !== task.name" class="navbar-btn-circle">
-                            <a :href="'/c/' + c + '/t/' + task.name" class="btn btn-default"></a>&nbsp;
-                        </p>
-                        <p v-else class="navbar-btn-circle-active">
-                            <a :href="'/c/' + c + '/t/' + task.name" class="btn btn-default active">{{key + 1}}</a>&nbsp;
-                        </p>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="" v-on:click.prevent="resetinput">
-                            <i class="fas fa-undo"></i> Reset</a>
-                    </li>
-                    <li>
-                        <a :href="'/create/' + t">
-                            <i class="fas fa-code-branch"></i> Fork</a>
-                    </li>
-                    <li>
-                        <a href="/docs/#/de-de/readme">
-                            <i class="fas fa-question"></i> Help</a>
-                    </li>
-                </ul>
-            </div>
+                <div class="collapse navbar-collapse">
+                    <ul v-if="collection.length" class="nav navbar-nav">
+                        <li v-if="landingpage">
+                            <a target="_blank" :href="landingpage">{{collectionname}}</a>
+                        </li>
+                        <li v-for="(task, key) in collection">
+                            <p v-if="t !== task.name" class="navbar-btn-circle">
+                                <a :href="'/c/' + c + '/t/' + task.name" class="btn btn-default"></a>&nbsp;
+                            </p>
+                            <p v-else class="navbar-btn-circle-active">
+                                <a :href="'/c/' + c + '/t/' + task.name" class="btn btn-default active">{{key + 1}}</a>&nbsp;
+                            </p>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="" v-on:click.prevent="resetinput">
+                                <i class="fas fa-undo"></i> Reset</a>
+                        </li>
+                        <li>
+                            <a :href="'/create/' + t">
+                                <i class="fas fa-code-branch"></i> Fork</a>
+                        </li>
+                        <li>
+                            <a href="/docs/#/de-de/readme">
+                                <i class="fas fa-question"></i> Help</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!--/.nav-collapse -->
         </div>
@@ -66,9 +67,15 @@
             <div class="col-md-3 col-sm-3 col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
-                    <button v-if="enviroments[n].codeoninitialrun" class="btn btn-default" v-on:click="reset">
+                    <button v-if="setupWorld" class="btn btn-default" v-on:click="reset">
                         <i class="fas fa-undo"></i> Reset
                     </button>
+
+
+                    <select class="selectpicker show-tick" data-width="fit" ref="select" v-if="worlds.length" v-model="world">
+                        <option v-for="l in worlds">{{l}}</option>
+                    </select>
+
                     <button class="btn btn-primary pull-right" v-on:click="play">
                         <i class="fas fa-play"></i> Run
                     </button>
@@ -135,7 +142,9 @@
     <!--<script src="/js/zepto.min.js"></script>-->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
     <script src="/js/lity-fork.min.js"></script>
+    <script src="/js/beautify.min.js"></script>
 
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>

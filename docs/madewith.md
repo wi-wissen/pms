@@ -18,6 +18,8 @@ Many thanks and respect to:
 * [https://github.com/davidroyer/vue2-editor](https://github.com/davidroyer/vue2-editor) (MIT) based on [quill](https://quilljs.com/) (BSD 3-Clause) (via [jsdelivery](https://www.jsdelivr.com/package/npm/vue2-editor)) 
 * https://github.com/SortableJS/Vue.Draggable (MIT)
 * https://github.com/RubaXa/Sortable (MIT)
+* https://github.com/beautify-web/js-beautify (MIT)
+* https://github.com/silviomoreto/bootstrap-select (MIT)
 
 
 ## Additional Packes for Enviroments:

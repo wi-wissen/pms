@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>PMS</title>
     <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/bootstrap-select.min.css' rel='stylesheet'>
     <link href='/css/fontawesome-all.min.css' rel='stylesheet'>
     <link href='/css/quill.bubble.css' rel='stylesheet'>
     <link href='/css/app.css' rel='stylesheet'>
@@ -36,7 +37,8 @@
                             <i class="fas fa-share-alt"></i> Publish</a>
                     </li>
                     <li>
-                        <a href="/docs/#/de-de/readme"><i class="fas fa-question"></i>  Help</a>
+                        <a href="/docs/#/de-de/readme">
+                            <i class="fas fa-question"></i> Help</a>
                     </li>
                 </ul>
             </div>
@@ -49,6 +51,10 @@
             <div class="col-md-3 col-sm-3 col-fixed-400">
                 <div class="clearfix" id="playgroundarea">
                     <iframe id="iframe" v-bind:srcdoc="iframehtml" src="/unsupportedbrowser.html" sandbox="allow-scripts allow-pointer-lock"></iframe>
+                    <select class="selectpicker show-tick" data-width="fit" ref="select" v-if="worlds.length" v-model="world">
+                        <option v-for="l in worlds">{{l}}</option>
+                    </select>
+
                     <button class="btn btn-primary pull-right" v-on:click="play">
                         <i class="fas fa-play"></i> Run</button>
                 </div>
@@ -76,7 +82,7 @@
                     <div class="form-group">
                         <label for="task" class="col-sm-2 control-label">Task</label>
                         <div class="col-sm-10" id="task">
-                                <vue-editor id="editor_task" v-model="task" :editor-toolbar="editorTaskToolbar" :editor-options='editorTaskOptions'></vue-editor>
+                            <vue-editor id="editor_task" v-model="task" :editor-toolbar="editorTaskToolbar" :editor-options='editorTaskOptions'></vue-editor>
                         </div>
                     </div>
 
@@ -119,13 +125,13 @@
                 <div id="editorarea" v-show="lang">
 
                     <ul class="nav nav-tabs">
-                        <li>
+                        <li v-bind:class="{ 'active': activeeditor == 'html' }">
                             <a v-on:click="edithtml" data-toggle="tab" href="#">HTML</a>
                         </li>
-                        <li>
+                        <li v-bind:class="{ 'active': activeeditor == 'css' }">
                             <a v-on:click="editcss" data-toggle="tab" href="#">CSS</a>
                         </li>
-                        <li>
+                        <li v-bind:class="{ 'active': activeeditor == 'code' }">
                             <a v-on:click="editcode" data-toggle="tab" href="#">{{ lang }}</a>
                         </li>
                     </ul>
@@ -148,25 +154,31 @@
 
     <footer class="footer">
         <div class="container">
-           <div class="row">
-              <div class="col-md-6 hidden-sm hidden-xs">
-                  <p class="text-muted">(c) wi-wissen.de</p>
-              </div>
-              <div class="col-md-6 text-right">
-                  <p class="text-muted">
-                      <a href="https://wi-wissen.de/contact.php">Contact</a> - 
-                      <a href="https://wi-wissen.de/contact.php">Report</a> -
+            <div class="row">
+                <div class="col-md-6 hidden-sm hidden-xs">
+                    <p class="text-muted">(c) wi-wissen.de</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="text-muted">
+                        <a href="https://wi-wissen.de/contact.php">Contact</a> -
+                        <a href="https://wi-wissen.de/contact.php">Report</a> -
                         <a href="/termsofuse.html">Terms of Use</a> -
-                      <a href="https://wi-wissen.de/datenschutz.html">Privacy</a> - 
-                      <a href="https://wi-wissen.de/impressum.html">Impress</a></p>
-              </div>
-          </div>  
-         </div>
-      </footer>
+                        <a href="https://wi-wissen.de/datenschutz.html">Privacy</a> -
+                        <a href="https://wi-wissen.de/impressum.html">Impress</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
     <script src="/js/bootbox.min.js"></script>
+
+    <script src="/js/beautify.min.js"></script>
+    <script src="/js/beautify-css.min.js"></script>
+    <script src="/js/beautify-html.min.js"></script>
 
     <script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>

@@ -13,6 +13,7 @@ var data = {
     code_preset: "",
     editor_code: null,
     iframehtml: "",
+    world: 1,
     t: null,
     c: null,
     collection: [],
@@ -49,6 +50,8 @@ function setupEditor() {
         console.log("can't parse code for showing!");
     }
 
+    //restore data from sessionStorage if exists
+    if(sessionStorage.getItem(data.t)) data.editor_code.setValue(sessionStorage.getItem(data.t));
 
     console.log(data.code);
     console.log(data.enviroments[data.n].acemode);
@@ -70,8 +73,32 @@ function setupEditor() {
         
         editorDiv.style.height = lineHeight * doc.getLength() + "px";
         editor.resize();
-    });       
+
+        var langTools = ace.require("ace/ext/language_tools");
+        langTools.setCompleters([]);
+
+        //backup data to sessionStorage
+        sessionStorage.setItem(data.t, data.editor_code.getValue());
+    });      
+    
+    
+
+   editor.commands.addCommand({
+    name: "beautifyCommand1",
+    bindKey: { win: "Ctrl-B", mac: "Command-Option-B" },
+    exec: function () {
+        if (data.enviroments[data.n].acemode == "javascript") {
+            data.editor_code.setValue(js_beautify(data.editor_code.getValue()));
+            console.log("beautified");
+        }
+        else {
+            console.log("Sorry language is not supported");
+        }
+    }
+    });
 }
+
+
 
 
 var vm = new Vue({
@@ -156,7 +183,7 @@ function loadTask(){
         for (var i in data.enviroments) {
             if (data.enviroments[i].lang == data.lang &&
                 data.enviroments[i].name == data.enviroment) {
-                data.n = i;
+                data.n = parseInt(i);
             }
         }
 
@@ -179,6 +206,8 @@ new Vue({
     data: data,
     methods: {
         resetinput: function () {
+            sessionStorage.removeItem(data.t); //clear session backup
+            data.world = 0;
             setupEditor();
         }
     }
@@ -213,7 +242,40 @@ new Vue({
         reset: function () {
             run(true);
         }
-    }
+    },
+    updated () {
+		$(this.$refs.select).selectpicker('refresh')
+	},
+    computed: {
+        setupWorld: function () {
+            return this.enviroments[this.n].codeoninitialrun;
+        },
+        worlds: function () {
+            var a = [];
+            var  _editor_code = "";
+            if (data.enviroments[data.n].worldkeyword) {
+                var re = new RegExp("(\/\/|#)[ ]?start\n(([\\s\\S]*)\n(\/\/|#)[ ]?stop|([\\s\\S]*))", "im");
+                var result = re.exec(data.code);
+                if (result == null) {
+                    _editor_code = _editor_code + data.editor_code.getValue();
+                } else {
+                    _editor_code = _editor_code + data.code.replace(result[0], data.editor_code.getValue());
+                }
+
+                var n = _editor_code.split(data.enviroments[data.n].worldkeyword).length - 4; //remove 3 for def, setting index and index
+        
+                for (i = 0; i < n; i++) {
+                    a.push(i + 1);
+                }
+            } 
+            return a;
+        }
+    },
+    watch: {
+        world: function () {
+            run(true);
+        }
+      }
 })
 
 function run(initial) {
@@ -228,13 +290,19 @@ function run(initial) {
     console.log('result');
     console.log(result);
 
+    //add initial code if this is the first run
     if (initial) _editor_code = data.enviroments[data.n].codeoninitialrun;
 
+    //rebuild code if some parts are hidden
     if (result == null) {
         _editor_code = _editor_code + data.editor_code.getValue();
     } else {
         _editor_code = _editor_code + data.code.replace(result[0], data.editor_code.getValue());
-    }            
+    }
+    
+    //set world variable if it is used in this enviroment
+    if (data.enviroments[data.n].worldkeyword) _editor_code = _editor_code.replace(data.enviroments[data.n].worldkeyword  + "N", data.world - 1);
+
 
     for (var i in data.enviroments[data.n].cssfiles) {
         css = css + "<link href='" + data.enviroments[data.n].cssfiles[i] + "' rel='stylesheet'>";
